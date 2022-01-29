@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Socket Example</title>
+   </head>
+   
+   <body>
+      <h1>Sample Chat App</h1>
+      <div id = "error-container"></div>
+      <input id = "name" type = "text" name = "name" value = "" 
+         placeholder = "Enter your name!">
+      <button type = "button" name = "button" onclick = "setUsername()">
+         Send!
+      </button>
+      <br/>
+      <input id = "room" type = "text" name = "room" value = "" 
+         placeholder = "Enter room name!">
+      <button type = "button" name = "button" onclick = "joinRoom()">
+         Join Room!
+      </button>
+
+      <br/>
+      <input id = "message" type = "text" name = "message" value = "" 
+         placeholder = "Enter message to send!">
+      <button type = "button" name = "button" onclick = "sendMessage()">
+         Send Message!
+      </button>
+
+      <h3>Chat History</h3>
+      <div id = "message-container"></div>
+
+      <script src="/socket.io/socket.io.js"></script>
+      <script>
+         const client = io()
+
+         client.on('welcome', (message) => {
+               addMessage(message)
+         })
+
+         //Message from all other clients
+         client.on('newMessage', (msg) => {
+            const data = `<b>${msg.sender}:</b> ${msg.message}`
+            addMessage(data)
+         })
+
+         //Button click to send message
+         function sendMessage(){
+            var msg = document.getElementById('message').value
+            client.emit('message', msg)
+            addMessage('Me: ' + msg)
+         }
+
+         //Custom message display
+         function addMessage(message){
+            document.getElementById('message-container').innerHTML += '<div>' +  message + '</div>'
+         }
+      </script>
+   </body>
+</html>
