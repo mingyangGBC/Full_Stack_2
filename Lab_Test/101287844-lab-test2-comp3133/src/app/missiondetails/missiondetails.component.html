@@ -1,0 +1,21 @@
+<h1> SpaceX Mission Details</h1>
+<div style="max-width: 540px;"    >
+    <div>
+      <div >
+        <img [src]="data.links.mission_patch"  >
+      </div>
+      <div >
+        <div >
+          <h5 style="text-align: center;">{{data.mission_name}}</h5>
+          <p> <strong>Launch Details <br></strong> {{data.details}}</p>
+          <p><strong> Flight Number: </strong>{{data.flight_number}}</p>
+          <p><small class="text-muted"> <strong>Year: </strong> {{data.launch_year}}</small></p>
+        </div>
+        <p><strong>Rocket<br></strong> rocket name: {{data.rocket.rocket_name}} <br> rocket type: {{data.rocket.rocket_type}}</p>
+        <strong>Launch Details <br></strong>
+        <a href={{data.links.video_link}}><i class="bi bi-youtube"></i></a>  &nbsp;&nbsp;
+        <a href={{data.links.wikipedia}}><i class="bi bi-globe"></i></a>  &nbsp;&nbsp;
+        <a href={{data.article_link}}><i class="bi bi-info-square-fill"></i></a>
+      </div>
+    </div>
+  </div>
