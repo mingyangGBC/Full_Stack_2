@@ -2,8 +2,7 @@ const User = require('./models/Users');
 const Listing = require('./models/Listing');
 const Booking = require('./models/Booking');
 const jwt =require('jsonwebtoken');
-const { UserInputError} = require('apollo-server-express');
-const checkAuth = require('./checkauth');
+const { UserInputError,AuthenticationError} = require('apollo-server-express');
 require('dotenv').config();
 
 
@@ -15,6 +14,39 @@ function generateToken(user){
         username:user.username,
         type:user.type
     },process.env.JWT_KEY,{expiresIn: '1h'});
+}
+
+function checkAuth(context){
+    const authHeader = context.req.headers.authorization;
+    if(authHeader){
+        const token = authHeader.split('Bearer ')[1];
+        if(token){
+            try{
+                const user = jwt.verify(token,process.env.JWT_KEY)
+                return user;
+            }catch(err){
+                    throw new AuthenticationError('Invalid/Expired token');
+            }
+        }
+        throw new AuthenticationError('Authentication token must be \'Bearer [token]');
+    }
+    throw new AuthenticationError('Authorization header must be provided');
+};
+
+function validateLoginInput (username,password){
+    const errors = {};
+    if(username.trim()===''){
+        errors.username = 'Username must not be empty';
+    }
+    if(password.trim()===''){
+        errors.username = 'Password must not be empty';
+    }
+
+    return{
+        errors,
+        valid: Object.keys(errors).length<1
+    };
+
 }
 
 

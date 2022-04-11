@@ -1,0 +1,46 @@
+
+<div >
+    <mat-card>
+        <h1>Add New Listing</h1>
+        <form>
+
+            <mat-form-field>
+                <input type="text" matInput placeholder="Listing Id" [formControl]="ListingIdControl">
+                <mat-error *ngIf="ListingIdControl.invalid">{{getErrorMessage_ListingId()}}</mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <input type="text" matInput placeholder="Listing Title" [formControl]="ListingTitleControl">
+                <mat-error *ngIf="ListingTitleControl.invalid">{{getErrorMessage_ListingTitle()}}</mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <input type="text" matInput placeholder="Description" [formControl]="DescriptionControl">
+                <mat-error *ngIf="DescriptionControl.invalid">{{getErrorMessage_Description()}}</mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <input type="text" matInput placeholder="Street" [formControl]="StreetControl">
+                <mat-error *ngIf="StreetControl.invalid">{{getErrorMessage_Street()}}</mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <input type="text" matInput placeholder="City" [formControl]="CityControl">
+                <mat-error *ngIf="CityControl.invalid">{{getErrorMessage_City()}}</mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <input type="text" matInput placeholder="Postal Code" [formControl]="PostalCodeControl">
+                <mat-error *ngIf="PostalCodeControl.invalid">{{getErrorMessage_PostalCode()}}</mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <input type="text" matInput placeholder="Price" [formControl]="PriceControl">
+                <mat-error *ngIf="PriceControl.invalid">{{getErrorMessage_Price()}}</mat-error>
+            </mat-form-field>
+            <br>
+   
+            <button (click)="add()">ADD</button>
+        </form>
+    </mat-card>
+</div>

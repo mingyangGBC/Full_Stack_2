@@ -1,0 +1,80 @@
+<ng-template *ngIf="bookedNotClicked then form1 else form2">
+</ng-template>
+
+<ng-template #form1>
+<div>
+<h1>Listings</h1>
+
+
+<div>
+  <div>
+    <mat-form-field appearance="outline" style="margin: 10px;">
+      <mat-label>Search by Name</mat-label>
+      <input type="text" matInput placeholder="Name" [formControl]="SearchByNameControl">
+      <button mat-icon-button matSuffix (click)="searchByName()">
+        <mat-icon style="color: rgb(44, 42, 165);" >search</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" style="margin: 10px;">
+      <mat-label>Search by City</mat-label>
+      <input type="text" matInput placeholder="City" [formControl]="SearchByCityControl">
+      <button mat-icon-button matSuffix (click)="searchByCity()">
+        <mat-icon style="color: rgb(44, 42, 165);" >search</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" style="margin: 10px;">
+      <mat-label>Search by Postal Code</mat-label>
+      <input type="text" matInput placeholder="Postal Code" [formControl]="SearchByPostalCodeControl">
+      <button mat-icon-button matSuffix (click)="searchByPostalCode()">
+        <mat-icon style="color: rgb(44, 42, 165);">search</mat-icon>
+      </button>
+    </mat-form-field>
+</div>
+      <div *ngFor="let listing of listings">
+        <mat-card class="example-card" style="margin: 10px; background-color:rgba(245, 247, 250, 0.993);color: rgb(74, 43, 248);">
+          <mat-card-title>{{ listing.listing_title }}</mat-card-title>
+          <mat-card-content>
+            <p>{{ listing.description }}</p>
+            <p>City : {{ listing.city }}</p>
+            <p>Street : {{ listing.street }}</p>
+            <p>Postal : {{ listing.postal_code}}</p>
+            <p>Price : {{ listing.price }}</p>
+            <mat-card-actions>
+              <button (click)="switchForms(listing)">BOOK</button>
+            </mat-card-actions>
+          </mat-card-content>
+          
+        </mat-card>
+      </div>
+
+  </div>
+  </div>
+  </ng-template>
+
+<ng-template #form2>
+  <div>
+      <mat-card>
+        <h1>Add a Booking</h1>
+        <form>
+            <mat-form-field appearance="outline">
+                <input type="text" matInput placeholder="Booking ID" [formControl]="BookingId">
+                <mat-error *ngIf="BookingId.invalid">{{getErrorMessage_Id()}}</mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="outline">
+                <input type="text" matInput placeholder="Booking Start Date" [formControl]="BookingStartDate">
+                <mat-error *ngIf="BookingStartDate.invalid">{{getErrorMessage_Start()}}</mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="outline">
+                <input type="text" matInput placeholder="Booking End Date"  [formControl]="BookingEndDate">
+                <mat-error *ngIf="BookingEndDate.invalid">{{getErrorMessage_End()}}</mat-error>
+            </mat-form-field>
+        </form>
+        <br>
+        <button (click)="addBooking('string')">Book</button>
+    </mat-card>
+  </div>
+</ng-template>

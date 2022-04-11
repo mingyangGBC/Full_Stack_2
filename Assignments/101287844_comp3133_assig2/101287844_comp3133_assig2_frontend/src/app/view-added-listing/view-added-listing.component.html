@@ -1,0 +1,14 @@
+<div class="container">
+    <h1>Added Listings</h1>
+    
+    <div>
+      <mat-selection-list [multiple]="false">
+        <mat-list-option *ngFor="let listing of listings" class="listItem">
+          {{ listing.listing_id }}
+          {{ listing.city }}
+          {{ listing.street}}
+        </mat-list-option>
+      </mat-selection-list>
+    </div>
+</div>
+    

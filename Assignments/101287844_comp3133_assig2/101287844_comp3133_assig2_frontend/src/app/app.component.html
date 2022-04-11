@@ -1,0 +1,43 @@
+
+<div class="container1">
+   
+        <p > 
+              <span>Assignment 2</span>
+              <br>
+              <span class="example-spacer"></span>
+              <button *ngIf="!isAuthenticated.value" (click)="toSignUp()">Signup</button>
+              <button *ngIf="!isAuthenticated.value" (click)="toLogin()">Login</button>
+              <button *ngIf="isAuthenticated.value" (click)="toLogout()">Logout</button>
+          </p>
+          
+
+    <div class="row">
+    <div class="col-md-3">
+      <div class="list-group">
+        <div>
+          <a routerLink="/">Search Listing</a>
+        </div>
+        <div *ngIf="this.userRole === 'customer' || this.userRole === 'guest'; else noneDiv"> 
+          <a routerLink="/booked_listing" >Booked Listings</a>
+        </div>
+        <div *ngIf="this.userRole === 'admin' else noneDiv">
+          <a routerLink="/addnew_listing" >Add New Listing</a>
+        </div>
+        <div *ngIf="this.userRole === 'admin' else noneDiv">
+          <a routerLink="/viewAdded_listing">View Added Listing</a>
+        </div>
+        <ng-template #noneDiv>
+          <div></div>
+        </ng-template>
+      </div>
+    </div>
+  
+    <div class="col-md-9" >
+      <router-outlet></router-outlet>
+    </div>
+    </div>
+  
+  
+  
+  
+  </div>
